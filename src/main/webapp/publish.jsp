@@ -1,4 +1,3 @@
-<%@ page import="com.mojafirma.com.sdatwitter.servlet.PublishServlet" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html" pageEncoding="utf-8" %>
 <html>
@@ -11,11 +10,11 @@
     }
 
     String author = " ";
-    for (Cookie cookie: request.getCookies()) {
-        if (PublishServlet.AUTHOR.equals(cookie.getName())) {
-            author = cookie.getValue();
-        }
-    }
+//    for (Cookie cookie: request.getCookies()) {
+//        if (PublishServlet.AUTHOR.equals(cookie.getName())) {
+//            author = cookie.getValue();
+//        }
+//    }
 %>
 <form action="/publish.servlet" method="post">
     <ul>

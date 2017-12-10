@@ -1,5 +1,7 @@
-<%@ page import="com.mojafirma.com.sdatwitter.service.MyTwitterService" %>
-<%@ page import="com.mojafirma.com.sdatwitter.model.MyTweet" %>
+<%@ page import="com.mojafirma.model.dao.TweetDao" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.mojafirma.model.Tweet" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -7,7 +9,9 @@
 <p>
     <a href="publish.jsp">Publish tweet</a>
 </p>
-<%! MyTwitterService twitterService = MyTwitterService.getIntsace(); %>
+<%! TweetDao tweetDao = new TweetDao();
+    List<Tweet> tweets = tweetDao.getTweetList();
+%>
 
 <table border="1">
     <tr>
@@ -16,22 +20,13 @@
         <th width="300px">Message</th>
     </tr>
 
-    <% for (MyTweet tweet: twitterService.getMyTweetsList()) {
-            out.print("<tr>");
-            out.print("<td>" + tweet.getAuthor() + "</td>");
-            out.print("<td>" + tweet.getTimestamp() + "</td>");
-            out.print("<td>" + tweet.getTweet() + "</td>");
-            out.print("<tr>");
-
-        }
-    %>
+    <% for (Tweet tweet : tweets) { %>
+       <tr>
+           <td><%= tweet.getUser().getNick() %> </td>
+           <td><%= tweet.getTimestamp()%></td>
+           <td><%= tweet.getMessage() %></td>
+        </tr>
+    <% } %>
 </table>
-<%--<%--%>
-    <%--for (MyTweet tweet : twitterService.getMyTweetsList()) {--%>
-        <%--out.println("Tweet Author: " + tweet.getAuthor() + "<br>");--%>
-        <%--out.println("Tweet message: " + tweet.getTweet() + "<br>");--%>
-        <%--out.println("Date: " + tweet.getTimestamp() + "<br>");--%>
-    <%--}--%>
-<%--%>--%>
 </body>
 </html>
