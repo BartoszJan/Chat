@@ -9,7 +9,7 @@ import java.util.List;
 public class TweetDao {
 
     public void addTweet(Tweet tweet) {
-        Session session = HibernateUtil.getHibernateSession();
+        Session session = HibernateUtil.getHibernateSession().getSessionFactory().openSession();
 
         session.beginTransaction();
         session.save(tweet);
@@ -19,7 +19,7 @@ public class TweetDao {
     }
 
     public Tweet getTweet(int id) {
-        Session session = HibernateUtil.getHibernateSession();
+        Session session = HibernateUtil.getHibernateSession().getSessionFactory().openSession();
 
         session.beginTransaction();
         Tweet tweet = session.get(Tweet.class, id);
@@ -31,7 +31,7 @@ public class TweetDao {
     }
 
     public List<Tweet> getTweetList() {
-        Session session = HibernateUtil.getHibernateSession();
+        Session session = HibernateUtil.getHibernateSession().getSessionFactory().openSession();
 
         session.beginTransaction();
         List<Tweet> tweets = session.createQuery("FROM Tweet").list();
@@ -43,7 +43,7 @@ public class TweetDao {
     }
 
     public void deleteTweet(int id) {
-        Session session = HibernateUtil.getHibernateSession();
+        Session session = HibernateUtil.getHibernateSession().getSessionFactory().openSession();
 
         session.beginTransaction();
         Tweet tweet = session.get(Tweet.class, id);
@@ -54,7 +54,7 @@ public class TweetDao {
     }
 
     public void updateTweet(Tweet tweet) {
-        Session session = HibernateUtil.getHibernateSession();
+        Session session = HibernateUtil.getHibernateSession().getSessionFactory().openSession();
 
         session.beginTransaction();
         session.update(tweet);

@@ -6,20 +6,21 @@
 <%
     String error = request.getParameter("error");
     if (error != null && "".equals(error)) {
-        out.println("Brak autora lub/i wiadomości");
+        out.println("Brak wiadomości");
     }
 
-    String author = " ";
-//    for (Cookie cookie: request.getCookies()) {
-//        if (PublishServlet.AUTHOR.equals(cookie.getName())) {
-//            author = cookie.getValue();
-//        }
-//    }
+    String nick = "";
+    for (Cookie cookie: request.getCookies()) {
+        if ("nick-cookie".equals(cookie.getName())) {
+            nick = cookie.getValue();
+        }
+    }
 %>
-<form action="/publish.servlet" method="post">
+
+<form action="/tweet.servlet" method="post">
     <ul>
 
-        <li>Author <input name="author" type="text" value=<%= author %> ></li>
+        <li>Nick: <%=nick%></li>
         <li>Message: <textarea name="message"></textarea></li>
 
     </ul>
